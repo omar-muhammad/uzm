@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Foot Condition Questionnaire</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        .radio-group label,
+        .checkbox-group label {
+            font-weight: normal;
+            margin-right: 15px;
+            display: inline-block; /* Keep radios/checkboxes inline */
+        }
+        .radio-group input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle; /* Align with text */
+        }
+        .form-group {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee; /* Separator */
+        }
+        .form-group:last-of-type {
+            border-bottom: none;
+        }
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        /* Ensure radio/checkbox labels don't take full width */
+        .inline-label {
+            display: inline-block !important; /* Override block */
+            margin-right: 10px;
+            margin-bottom: 10px; /* Spacing */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Foot Condition Questionnaire</h1>
+        <p>Please answer these questions to help us understand your foot condition better. Your responses will be sent securely.</p>
+
+        <!-- IMPORTANT: Replace the action URL with YOUR Formspree endpoint -->
+        <form action="https://formspree.io/f/xgvadrvj" method="POST">
+
+            <!-- 1. Symptoms -->
+            <div class="form-group">
+                <label for="symptoms">1. Besides dryness/cracking, do you experience any of these? (Describe if needed)</label>
+                <div class="checkbox-group">
+                     <label class="inline-label"><input type="checkbox" name="symptoms_type[]" value="Itching"> Itching</label>
+                     <label class="inline-label"><input type="checkbox" name="symptoms_type[]" value="Painful (when walking)"> Painful (when walking)</label>
+                     <label class="inline-label"><input type="checkbox" name="symptoms_type[]" value="Tightness"> Tightness</label>
+                     <label class="inline-label"><input type="checkbox" name="symptoms_type[]" value="None of these"> None of these</label>
+                </div>
+                <textarea id="symptoms_details" name="symptoms_details" placeholder="Describe symptoms in more detail if applicable..."></textarea>
+            </div>
+
+            <!-- 2. History -->
+            <div class="form-group">
+                <label>2. History of the Condition:</label>
+                <label for="history_start">Approximately when did you first notice this problem?</label>
+                <input type="text" id="history_start" name="history_start">
+
+                <label>How has it progressed?</label>
+                <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="history_progression" value="Constant"> Constant</label>
+                    <label class="inline-label"><input type="radio" name="history_progression" value="Getting worse"> Getting worse</label>
+                    <label class="inline-label"><input type="radio" name="history_progression" value="Comes and goes"> Comes and goes</label>
+                </div>
+
+                <label>Is it noticeably worse during certain seasons (like winter)?</label>
+                 <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="history_seasonal" value="Yes"> Yes</label>
+                    <label class="inline-label"><input type="radio" name="history_seasonal" value="No"> No</label>
+                    <label class="inline-label"><input type="radio" name="history_seasonal" value="Unsure"> Unsure</label>
+                </div>
+            </div>
+
+            <!-- 3. Location -->
+            <div class="form-group">
+                <label>3. Where exactly is the dryness/cracking? (Check all that apply)</label>
+                <div class="checkbox-group">
+                    <label class="inline-label"><input type="checkbox" name="location[]" value="Soles of feet"> Soles of feet</label>
+                    <label class="inline-label"><input type="checkbox" name="location[]" value="Between toes"> Between toes</label>
+                    <label class="inline-label"><input type="checkbox" name="location[]" value="Top of feet"> Top of feet</label>
+                    <label class="inline-label"><input type="checkbox" name="location[]" value="Hands (similar condition)"> Hands (similar condition)</label>
+                </div>
+                 <label for="location_other">Other locations?</label>
+                 <input type="text" id="location_other" name="location_other" placeholder="Specify if needed...">
+            </div>
+
+            <!-- 4. Previous Treatments -->
+            <div class="form-group">
+                 <label>4. Previous Treatments:</label>
+                 <label for="treatments_tried">What creams, lotions, ointments, or home remedies have you tried?</label>
+                 <textarea id="treatments_tried" name="treatments_tried" placeholder="List anything you can remember..."></textarea>
+
+                 <label>Did any of these help significantly?</label>
+                 <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="treatments_effect" value="Yes, some helped"> Yes, some helped</label>
+                    <label class="inline-label"><input type="radio" name="treatments_effect" value="Some made it worse"> Some made it worse</label>
+                    <label class="inline-label"><input type="radio" name="treatments_effect" value="No real effect"> No real effect</label>
+                 </div>
+
+                 <label>Have you ever used prescription medications (creams or pills) for this?</label>
+                 <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="treatments_prescription" value="Yes"> Yes</label>
+                    <label class="inline-label"><input type="radio" name="treatments_prescription" value="No"> No</label>
+                 </div>
+            </div>
+
+            <!-- 5. Foot Care Routine -->
+            <div class="form-group">
+                <label>5. Your Foot Care Routine:</label>
+                <label for="routine_wash_freq">How often do you wash your feet?</label>
+                <input type="text" id="routine_wash_freq" name="routine_wash_freq" placeholder="e.g., Daily, Every other day">
+                <label for="routine_wash_product">What soap/cleanser do you usually use?</label>
+                <input type="text" id="routine_wash_product" name="routine_wash_product" placeholder="e.g., Regular soap, mild cleanser, specific brand">
+
+                <label for="routine_moisturize_freq">How often do you apply moisturizer to your feet?</label>
+                <input type="text" id="routine_moisturize_freq" name="routine_moisturize_freq" placeholder="e.g., Daily, twice daily, rarely">
+                <label for="routine_moisturizer_type">What kind of moisturizer?</label>
+                <input type="text" id="routine_moisturizer_type" name="routine_moisturizer_type" placeholder="e.g., Light lotion, thick cream, petroleum jelly, specific brand">
+
+                <label>Do you ever use a pumice stone or foot file?</label>
+                <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="routine_pumice" value="Yes, regularly"> Yes, regularly</label>
+                    <label class="inline-label"><input type="radio" name="routine_pumice" value="Yes, occasionally"> Yes, occasionally</label>
+                    <label class="inline-label"><input type="radio" name="routine_pumice" value="No, never"> No, never</label>
+                 </div>
+            </div>
+
+             <!-- 6. Footwear & Environment -->
+            <div class="form-group">
+                <label>6. Footwear & Environment:</label>
+                <label for="env_shoes">What type of shoes do you wear most often?</label>
+                <input type="text" id="env_shoes" name="env_shoes" placeholder="e.g., Sneakers, sandals, leather shoes, boots">
+                <label for="env_socks">What material are your socks usually made of?</label>
+                <input type="text" id="env_socks" name="env_socks" placeholder="e.g., Cotton, synthetic, wool blend">
+
+                <label>How often do you walk barefoot?</label>
+                <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="env_barefoot" value="Often (at home/elsewhere)"> Often (at home/elsewhere)</label>
+                    <label class="inline-label"><input type="radio" name="env_barefoot" value="Sometimes (mainly at home)"> Sometimes (mainly at home)</label>
+                    <label class="inline-label"><input type="radio" name="env_barefoot" value="Rarely or Never"> Rarely or Never</label>
+                 </div>
+
+                 <label>Do you frequently use public pools, gyms, or communal showers?</label>
+                <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="env_public_areas" value="Yes"> Yes</label>
+                    <label class="inline-label"><input type="radio" name="env_public_areas" value="No"> No</label>
+                 </div>
+            </div>
+
+            <!-- 7. Medical & Family History -->
+            <div class="form-group">
+                <label>7. Medical & Family History:</label>
+                <label>Have you been diagnosed with any of the following? (Check all that apply)</label>
+                <div class="checkbox-group">
+                    <label class="inline-label"><input type="checkbox" name="medical_conditions[]" value="Diabetes"> Diabetes</label>
+                    <label class="inline-label"><input type="checkbox" name="medical_conditions[]" value="Thyroid problems"> Thyroid problems</label>
+                    <label class="inline-label"><input type="checkbox" name="medical_conditions[]" value="Eczema (anywhere)"> Eczema (anywhere)</label>
+                    <label class="inline-label"><input type="checkbox" name="medical_conditions[]" value="Psoriasis (anywhere)"> Psoriasis (anywhere)</label>
+                    <label class="inline-label"><input type="checkbox" name="medical_conditions[]" value="Known allergies"> Known allergies</label>
+                </div>
+                 <label for="medical_other">Any other relevant medical conditions?</label>
+                 <input type="text" id="medical_other" name="medical_other" placeholder="Specify if needed...">
+
+                <label>Does anyone in your close family have similar foot problems, Psoriasis, or Eczema?</label>
+                <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="family_history" value="Yes"> Yes</label>
+                    <label class="inline-label"><input type="radio" name="family_history" value="No"> No</label>
+                    <label class="inline-label"><input type="radio" name="family_history" value="Unsure"> Unsure</label>
+                 </div>
+            </div>
+
+            <!-- 8. Lifestyle -->
+            <div class="form-group">
+                <label>8. Lifestyle:</label>
+                <label>Would you say you drink plenty of water daily?</label>
+                <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="lifestyle_water" value="Yes"> Yes</label>
+                    <label class="inline-label"><input type="radio" name="lifestyle_water" value="No"> No</label>
+                    <label class="inline-label"><input type="radio" name="lifestyle_water" value="Unsure"> Unsure</label>
+                 </div>
+
+                 <label>Does your daily routine involve standing or walking for long periods?</label>
+                 <div class="radio-group">
+                    <label class="inline-label"><input type="radio" name="lifestyle_standing" value="Yes"> Yes</label>
+                    <label class="inline-label"><input type="radio" name="lifestyle_standing" value="No"> No</label>
+                    <label class="inline-label"><input type="radio" name="lifestyle_standing" value="Sometimes"> Sometimes</label>
+                 </div>
+            </div>
+
+            <!-- Hidden field for subject line (optional but helpful) -->
+            <input type="hidden" name="_subject" value="New Foot Questionnaire Response">
+            <!-- Optional: Redirect to a thank you page -->
+            <!-- <input type="hidden" name="_next" value="https://yoursite.com/thankyou.html"> -->
+
+            <button type="submit">Submit Responses</button>
+
+        </form>
+    </div>
+</body>
+</html>
